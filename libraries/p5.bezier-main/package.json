@@ -1,0 +1,43 @@
+{
+	"name": "p5bezier",
+	"version": "0.7.1",
+	"author": "Peiling Jiang",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/peilingjiang/p5.bezier.git"
+	},
+	"main": "lib/p5.bezier.min.js",
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.2",
+		"@types/p5": "^1.7.6",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
+		"prettier": "^3.3.3",
+		"terser-webpack-plugin": "^5.3.10",
+		"ts-loader": "^9.5.1",
+		"typescript": "^5.6.2",
+		"webpack": "^5.94.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"bugs": {
+		"url": "https://github.com/peilingjiang/p5.bezier/issues"
+	},
+	"description": "Bezier curves for canvas graphics on the web, built to work with p5.js",
+	"files": ["lib"],
+	"homepage": "https://github.com/peilingjiang/p5.bezier#readme",
+	"keywords": ["p5.js", "Bezier", "Computer Graphics"],
+	"license": "MIT",
+	"lint-staged": {
+		"*.{ts,json}": "biome check --write --no-errors-on-unmatched",
+		"*.{css,md,html}": "prettier --write"
+	},
+	"scripts": {
+		"format": "biome format --write . && prettier --write \"**/*.{css,md,html}\"",
+		"lint": "biome check --write .",
+		"start": "webpack --env=development",
+		"build": "webpack --env=production",
+		"prepare": "husky",
+		"netlify": "cp -r ./lib ./examples/"
+	},
+	"types": "lib/p5.bezier.d.ts"
+}
