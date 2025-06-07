@@ -27,26 +27,41 @@ function setup() {
   fft = new p5.FFT();
   fft.setInput(audio);
 
-  noFill();
+
   strokeWeight(3);
 
 }
 
 function draw() {
   background("lightblue");
-
-  let waveHeight = sketch_height/2;
-  let waveLength = 200;
-  let segments = sketch_width/ waveLength;
   
-  const level = amp.getLevel() * 3000;
+  const level = amp.getLevel() * 1500;
+  let spectrum = fft.analyze(8192);
 
-  for (let i = 0; i < sketch_width; i++) {
-    p5bezier.draw([
-      [segments, waveHeight],
-      [segments += i, level],
-      [segments += i, level]
-      
-    ])
-  }
+  let points_level = [];
+  let points_spectrum = [];
+  let points_spectrum3 = [];
+  
+    for (let x = 0; x < sketch_width; x += 10) {
+      let y = 200 + sin(x * 0.05) * level;
+      points_level.push([x, y]);
+    }
+    
+    for (let i = 0; i < spectrum.length; i++) {
+      let x = map(i, 0, spectrum.length - 1, 0, sketch_width);
+      let y = sketch_height / 2 + (spectrum[i]) * 0.5;
+      points_spectrum.push([x, y]);
+    }
+
+    noFill();
+    p5bezier.draw(points_level, 'OPEN', 5);
+    noFill();
+    p5bezier.draw(points_spectrum, 'OPEN', 5);
+ 
+  
+  
+
+  
+
+  
 }
