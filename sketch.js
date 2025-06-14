@@ -33,7 +33,7 @@ function setup() {
 }
 
 function draw() {
-  background("lightblue");
+  background(0, 10);
   
   const level = amp.getLevel() * 1500;
   let spectrum = fft.analyze(8192);
@@ -53,13 +53,14 @@ function draw() {
       points_spectrum.push([x, y]);
     }
 
+    strokeWeight(2);
     noFill();
     //fill('purple');
-    stroke('purple');
+    stroke('lightgreen');
     p5bezier.draw(points_spectrum, 'OPEN', 5);
 
     //fill('black');
-    stroke('black');
+    stroke('lightyellow');
     p5bezier.draw(points_level, 'OPEN', 5);
 
   
