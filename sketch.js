@@ -54,14 +54,13 @@ function draw() {
     }
 
     noFill();
-    p5bezier.draw(points_level, 'OPEN', 5);
-    noFill();
+    //fill('purple');
+    stroke('purple');
     p5bezier.draw(points_spectrum, 'OPEN', 5);
- 
-  
-  
 
-  
+    //fill('black');
+    stroke('black');
+    p5bezier.draw(points_level, 'OPEN', 5);
 
   
 }
