@@ -9,10 +9,13 @@ const sketch_width = 400;
 
 let colorStart1, colorEnd1;
 let colorStart2, colorEnd2;
+let colorStart3, colorEnd3;
 let t1 = 0; // Interpolationswert
 let t2 = 0;
+let t3 = 0;
 let tSpeed1 = 0.005;
 let tSpeed2 = 0.004; // anderer Wert für unabhängige Bewegung
+let tSpeed3 = 0.003;
 
 
 function preload(){
@@ -37,13 +40,17 @@ function setup() {
 
   strokeWeight(3);
 
-  // Farbverlauf 1: Blau → Lila
-  colorStart1 = color(0, 100, 255); //Blau
-  colorEnd1 = color(200, 0, 200); //Lila
+  // Farbverlauf 1: Indigo → Magenta
+  colorStart1 = color(75, 0, 130);     // Indigo
+  colorEnd1 = color(255, 0, 150);      // Magenta
 
-  // Farbverlauf 2: Pink → Gelb
-  colorStart2 = color(255, 0, 150);
-  colorEnd2 = color(255, 255, 0);
+  // Farbverlauf 2: Koralle → Goldgelb
+  colorStart2 = color(255, 127, 80);   // Koralle
+  colorEnd2 = color(255, 215, 0);      // Goldgelb
+
+  // Farbverlauf 3: Türkis → Limettengrün
+  colorStart3 = color(64, 224, 208);   // Türkis
+  colorEnd3 = color(173, 255, 47);     // Limettengrün
 
 }
 
@@ -87,18 +94,23 @@ function draw() {
     strokeWeight(2);
     p5bezier.draw(points_level, 'OPEN', 5);
 
-    stroke(random(240, 255), random(240, 255), random(150, 200));
-    strokeWeight(3);
+    let c3 = lerpColor(colorStart3, colorEnd3, t3);
+    stroke(c3);
+    strokeWeight(2);
     p5bezier.draw(points_bass, 'OPEN', 5);
 
     // t aktualisieren (hin und her interpolieren)
     t1 += tSpeed1;
     t2 += tSpeed2;
+    t3 += tSpeed3;
 
     if (t1 > 1 || t1 < 0) {
       tSpeed1 *= -1;
     }
     if (t2 > 1 || t2 < 0) {
       tSpeed2 *= -1;
+    }
+    if (t3 > 1 || t3 < 0) {
+      tSpeed3 *= -1;
     }
 }
