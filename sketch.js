@@ -101,29 +101,32 @@ function draw() {
       points_treble.push([x, y]);
     }
 
-    // === Linie 1: Spectrum 
+    // Linie 1: Spectrum 
     let c1 = lerpColor(colorStart1, colorEnd1, t1);
     stroke(c1);
     strokeWeight(1.5);
     noFill();
     p5bezier.draw(points_spectrum, 'OPEN', 5);
 
-    // === Linie 2: Level 
+    // Linie 2: Level 
     let c2 = lerpColor(colorStart2, colorEnd2, t2);
     stroke(c2);
     strokeWeight(1.5);
     p5bezier.draw(points_level, 'OPEN', 5);
 
+    // Linie 3: Bass 
     let c3 = lerpColor(colorStart3, colorEnd3, t3);
     stroke(c3);
     strokeWeight(1.5);
     p5bezier.draw(points_bass, 'OPEN', 5);
 
+    // Linie 4: Mitten -> Gesang, Gitrarren, usw.
     let c4 = lerpColor(colorStart4, colorEnd4, t2);
     stroke(c4);
     strokeWeight(1.5);
     p5bezier.draw(points_mid, 'OPEN', 5);
 
+    // Linie 5: Hohe Töne
     let c5 = lerpColor(colorStart5, colorEnd5, t1);
     stroke(c5);
     strokeWeight(1.5);
