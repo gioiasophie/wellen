@@ -50,23 +50,33 @@ function setup() {
   colorStart3 = color(255, 160, 122);   // LightSalmon
   colorEnd3 = color(255, 218, 185);   // PeachPuff
 
+  // Farbverlauf 4
+  colorStart4 = color(255, 127, 80);    // Coral
+  colorEnd4 = color(255, 105, 180);    // HotPink
+
+  // Farbverlauf 5
+  colorStart5 = color(173, 255, 47);    // GreenYellow
+  colorEnd5   = color(135, 206, 250);   // LightSkyBlue
+
 }
 
 function draw() {
-  
-  background(20, 24, 50, 10); // oder (0) für hartes Schwarz
-  
+  background(20, 24, 50, 15); // oder (0) für hartes Schwarz
+
   const level = amp.getLevel() * 1500;
   let spectrum = fft.analyze(8192);
   let bass = fft.getEnergy("bass");
-  
+  let mid = fft.getEnergy("mid");
+  let treble = fft.getEnergy("treble");
 
   let points_level = [];
   let points_spectrum = [];
   let points_bass = [];
+  let points_mid = [];
+  let points_treble = [];
   
     for (let x = 0; x < windowWidth; x += 10) {
-      let y = windowHeight/2 + sin(x * 0.05) * level;
+      let y = windowHeight/2 + tan(x * 0.05) * level;
       points_level.push([x, y]);
     }
     
@@ -79,6 +89,16 @@ function draw() {
     for (let x = 0; x < windowWidth; x += 10) {
       let y = windowHeight/2 + cos(x * 0.04) * bass;
       points_bass.push([x, y]);
+    }
+
+    for (let x = 0; x < windowWidth; x += 10) {
+      let y = windowHeight/2 + tan(x * 0.04) * mid;
+      points_mid.push([x, y]);
+    }
+
+    for (let x = 0; x < windowWidth; x += 10) {
+      let y = windowHeight/2 + sin(x * 0.04) * treble;
+      points_treble.push([x, y]);
     }
 
     // === Linie 1: Spectrum 
@@ -98,6 +118,16 @@ function draw() {
     stroke(c3);
     strokeWeight(1.5);
     p5bezier.draw(points_bass, 'OPEN', 5);
+
+    let c4 = lerpColor(colorStart4, colorEnd4, t2);
+    stroke(c4);
+    strokeWeight(1.5);
+    p5bezier.draw(points_mid, 'OPEN', 5);
+
+    let c5 = lerpColor(colorStart5, colorEnd5, t1);
+    stroke(c5);
+    strokeWeight(1.5);
+    p5bezier.draw(points_treble, 'OPEN', 5);
 
     // t aktualisieren (hin und her interpolieren)
     t1 += tSpeed1;
